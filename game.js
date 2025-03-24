@@ -18,6 +18,27 @@ const drawGame = () => {
     msg.style.backgroundColor="#081b31";
 }
 
+const resetGame = (winner) =>{
+    msg.innerText= `${winner} wins the game! Game resetting...`;
+    msg.style.backgroundColor=`#ffbf00`;
+
+    setTimeout(() => {
+        userScore=0;
+        compScore=0;
+        userScorePara.innerText=userScore;
+        compScorePara.innerText=compScore;
+        msg.innerText="play your move!"
+        msg.style.backgroundColor="#081b31";
+    }, 3000);
+}
+
+const checkWinner = () =>{
+    if(userScore==10)
+        resetGame("You");
+    else if(compScore==10)
+        resetGame("Computer");
+} 
+
 const showWinner= (userWin,userchoice,compChoice) => {
     if(userWin){
         userScore++;
@@ -31,6 +52,7 @@ const showWinner= (userWin,userchoice,compChoice) => {
         msg.innerText=`you lose! ${compChoice} beats ${userchoice}`;
         msg.style.backgroundColor="red";
     }
+    checkWinner();
 }
 
 const playGame=(userChoice) => {
